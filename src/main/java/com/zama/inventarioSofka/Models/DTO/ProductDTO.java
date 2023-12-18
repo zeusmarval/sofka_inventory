@@ -2,12 +2,14 @@ package com.zama.inventarioSofka.Models.DTO;
 
 import lombok.Getter;
 
+import java.math.BigDecimal;
+
 @Getter
 public class ProductDTO {
 
     private String name;
     private int quantity;
-    private double basePrice;
+    private BigDecimal basePrice;
     private int wholesaleUnits;
 
     public void setName(String name) {
@@ -18,7 +20,7 @@ public class ProductDTO {
         this.quantity = quantity;
     }
 
-    public void setBasePrice(double basePrice) {
+    public void setBasePrice(BigDecimal basePrice) {
         this.basePrice = basePrice;
     }
 

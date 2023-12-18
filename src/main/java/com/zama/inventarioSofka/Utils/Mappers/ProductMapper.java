@@ -9,7 +9,7 @@ public class ProductMapper {
         dto.setName(product.getName());
         dto.setQuantity(product.getQuantity());
         dto.setBasePrice(product.getBasePrice());
-        dto.setWholesaleUnits(product.getWholesaleUnit());
+        dto.setWholesaleUnits(product.getWholesaleUnits());
         return dto;
     }
 
@@ -18,7 +18,7 @@ public class ProductMapper {
         product.setName(dto.getName());
         product.setQuantity(dto.getQuantity());
         product.setBasePrice(dto.getBasePrice());
-        product.setWholesaleUnit(dto.getWholesaleUnits());
+        product.setWholesaleUnits(dto.getWholesaleUnits());
         return product;
     }
 

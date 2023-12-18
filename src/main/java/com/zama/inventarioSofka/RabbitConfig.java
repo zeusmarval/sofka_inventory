@@ -35,6 +35,7 @@ public class RabbitConfig {
     public static final String ROUTING_KEY_PRODUCT_ERROR = "errors.product.routing.key";
     public static final String ROUTING_KEY_SALES_ERROR = "errors.sales.routing.key";
     public static final String URI_NAME = "amqps://xuvssrll:lMktC642iNhZ4wjfudHaET9jwFuJpOZm@cow.rmq2.cloudamqp.com/xuvssrll";
+    //public static final String URI_NAME = "amqps://frrbuzmm:ywSFdD7KMqE6rfoe2osmgX9w_Av74CoJ@cow.rmq2.cloudamqp.com/frrbuzmm";
 
     @Bean
     public AmqpAdmin amqpAdmin() {

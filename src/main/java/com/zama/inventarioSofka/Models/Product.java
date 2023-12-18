@@ -3,6 +3,8 @@ package com.zama.inventarioSofka.Models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
+
 @Document(collection = "products")
 public class Product {
 
@@ -10,17 +12,17 @@ public class Product {
     private String id;
     private String name;
     private int quantity;
-    private double basePrice;
-    private int wholesaleUnit;
+    private BigDecimal basePrice;
+    private int wholesaleUnits;
 
     public Product() {
     }
 
-    public Product(String name, int quantity, double basePrice, int wholesaleUnit) {
+    public Product(String name, int quantity, BigDecimal basePrice, int wholesaleUnit) {
         this.name = name;
         this.quantity = quantity;
         this.basePrice = basePrice;
-        this.wholesaleUnit = wholesaleUnit;
+        this.wholesaleUnits = wholesaleUnit;
     }
 
     public String getId() {
@@ -47,20 +49,20 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public double getBasePrice() {
+    public BigDecimal getBasePrice() {
         return basePrice;
     }
 
-    public void setBasePrice(double basePrice) {
+    public void setBasePrice(BigDecimal basePrice) {
         this.basePrice = basePrice;
     }
 
-    public int getWholesaleUnit() {
-        return wholesaleUnit;
+    public int getWholesaleUnits() {
+        return wholesaleUnits;
     }
 
-    public void setWholesaleUnit(int wholesaleUnit) {
-        this.wholesaleUnit = wholesaleUnit;
+    public void setWholesaleUnits(int wholesaleUnits) {
+        this.wholesaleUnits = wholesaleUnits;
     }
 
     @Override
@@ -69,7 +71,7 @@ public class Product {
                 "name='" + name + '\'' +
                 ", quantity=" + quantity +
                 ", basePrice=" + basePrice +
-                ", wholesaleUnit=" + wholesaleUnit +
+                ", wholesaleUnit=" + wholesaleUnits +
                 '}';
     }
 }

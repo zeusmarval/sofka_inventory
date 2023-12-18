@@ -1,14 +1,12 @@
-package com.zama.inventarioSofka.Services.Sale;
+package com.zama.inventarioSofka.UserCases.Sale;
 
 import com.zama.inventarioSofka.Models.Sale;
 import com.zama.inventarioSofka.Models.SoldProduct;
 import com.zama.inventarioSofka.drivenAdapters.repository.Sale_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-@Service
-public class SaleServices_Imp implements I_SaleServices {
+public class SalesResource {
 
     @Autowired
     Sale_Repository saleRepository;
