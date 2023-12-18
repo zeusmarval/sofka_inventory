@@ -1,26 +1,40 @@
 package com.zama.inventarioSofka.Models;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Document(collection = "sales")
 public class Sale {
 
+    @Id
+    private String id;
     private LocalDateTime saleDate;
     private List<SoldProduct> soldProducts;
     private double totalSale;
 
-    // Constructor por defecto
     public Sale() {
     }
 
-    // Constructor con parámetros
     public Sale(LocalDateTime saleDate, List<SoldProduct> soldProducts) {
         this.saleDate = saleDate;
         this.soldProducts = soldProducts;
         calculateTotalSale();
     }
 
-    // Getters y Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTotalSale(double totalSale) {
+        this.totalSale = totalSale;
+    }
 
     public LocalDateTime getSaleDate() {
         return saleDate;
@@ -43,14 +57,12 @@ public class Sale {
         return totalSale;
     }
 
-    // Método para calcular el total de la venta
     private void calculateTotalSale() {
         this.totalSale = soldProducts.stream()
                 .mapToDouble(SoldProduct::getSubtotal)
                 .sum();
     }
 
-    // toString para facilitar la representación en cadena
     @Override
     public String toString() {
         return "Sale{" +
