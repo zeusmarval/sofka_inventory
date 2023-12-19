@@ -34,4 +34,11 @@ public class Sale {
         this.totalSale = totalSale;
     }
 
+    public LocalDateTime getSaleDate() {
+        return saleDate;
+    }
+
+    public void setSaleDate(LocalDateTime saleDate) {
+        this.saleDate = saleDate;
+    }
 }

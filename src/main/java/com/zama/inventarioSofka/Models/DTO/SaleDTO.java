@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SaleDTO {
 
-    private LocalDateTime saleDate = LocalDateTime.now();
+    private String saleDate = LocalDateTime.now().toString();
     private List<SoldProduct> soldProducts;
     private BigDecimal totalSale;
     public SaleDTO() {
@@ -28,6 +28,14 @@ public class SaleDTO {
 
     public void setTotalSale(BigDecimal totalSale) {
         this.totalSale = totalSale;
+    }
+
+    public String getSaleDate() {
+        return saleDate;
+    }
+
+    public void setSaleDate(String saleDate) {
+        this.saleDate = saleDate;
     }
 
     @Override

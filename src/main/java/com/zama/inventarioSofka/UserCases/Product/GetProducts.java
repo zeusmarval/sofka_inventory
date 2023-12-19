@@ -28,7 +28,7 @@ public class GetProducts {
         Flux<Product> allProducts = productResource.getAllProductsPaginated(page, size);
 
         return allProducts.collectList().flatMap(products -> {
-            publisherGets.publish(products);
+            publisherGets.product(products);
             return ServerResponse.ok()
                     .body(allProducts, Product.class)
                     .switchIfEmpty(ServerResponse.notFound().build())

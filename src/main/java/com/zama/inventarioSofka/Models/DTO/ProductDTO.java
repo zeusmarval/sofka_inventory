@@ -8,9 +8,10 @@ import java.math.BigDecimal;
 public class ProductDTO {
 
     private String name;
-    private int quantity;
+    private Integer quantity;
     private BigDecimal basePrice;
-    private int wholesaleUnits;
+    private Integer wholesaleUnits;
+    private BigDecimal subtotal;
 
     public void setName(String name) {
         this.name = name;
@@ -28,13 +29,18 @@ public class ProductDTO {
         this.wholesaleUnits = wholesaleUnits;
     }
 
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public ProductDTO() {
+    }
+
     @Override
     public String toString() {
         return "ProductDTO{" +
                 "name='" + name + '\'' +
                 ", quantity=" + quantity +
-                ", basePrice=" + basePrice +
-                ", wholesaleUnits=" + wholesaleUnits +
                 '}';
     }
 }

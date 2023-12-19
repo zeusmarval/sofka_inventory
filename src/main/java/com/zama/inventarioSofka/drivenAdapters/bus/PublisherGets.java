@@ -21,7 +21,7 @@ public class PublisherGets {
     @Autowired
     private Gson gson;
 
-    public void publish(List<Product> products) {
+    public void product(List<Product> products) {
         MessagePublish message = new MessagePublish(
                 "GET", "Product", gson.toJson(products)
         );

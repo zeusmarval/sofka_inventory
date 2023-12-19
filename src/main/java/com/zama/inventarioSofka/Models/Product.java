@@ -11,18 +11,25 @@ public class Product {
     @Id
     private String id;
     private String name;
-    private int quantity;
+    private Integer quantity;
     private BigDecimal basePrice;
-    private int wholesaleUnits;
+    private Integer wholesaleUnits;
+    private BigDecimal subtotal;
 
     public Product() {
     }
 
-    public Product(String name, int quantity, BigDecimal basePrice, int wholesaleUnit) {
+    public Product(String name, Integer quantity, BigDecimal basePrice, Integer wholesaleUnit) {
         this.name = name;
         this.quantity = quantity;
         this.basePrice = basePrice;
         this.wholesaleUnits = wholesaleUnit;
+    }
+
+    public Product(String name, Integer quantity, BigDecimal subtotal) {
+        this.name = name;
+        this.quantity = quantity;
+        this.subtotal = subtotal;
     }
 
     public String getId() {
@@ -65,6 +72,14 @@ public class Product {
         this.wholesaleUnits = wholesaleUnits;
     }
 
+    public BigDecimal getsubtotal() {
+        return subtotal;
+    }
+
+    public void setsubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
+    }
+
     public BigDecimal calculateTotalWholesale(int quantity) {
         if (quantity >= wholesaleUnits) {
             BigDecimal discountedPrice = applyDiscount(basePrice);
@@ -85,13 +100,4 @@ public class Product {
         return basePrice.multiply(discountMultiplier);
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "name='" + name + '\'' +
-                ", quantity=" + quantity +
-                ", basePrice=" + basePrice +
-                ", wholesaleUnit=" + wholesaleUnits +
-                '}';
-    }
 }
