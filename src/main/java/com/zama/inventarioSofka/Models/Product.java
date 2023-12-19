@@ -67,7 +67,6 @@ public class Product {
 
     public BigDecimal calculateTotalWholesale(int quantity) {
         if (quantity >= wholesaleUnits) {
-            // Aplicar descuento del 10% si se alcanza la cantidad mínima al por mayor
             BigDecimal discountedPrice = applyDiscount(basePrice);
             int unitsForRetail = quantity % wholesaleUnits;
             int unitsForWholesale = quantity - unitsForRetail;
@@ -82,7 +81,6 @@ public class Product {
     }
 
     private BigDecimal applyDiscount(BigDecimal basePrice) {
-        // Apply a 10% discount
         BigDecimal discountMultiplier = BigDecimal.valueOf(0.9);
         return basePrice.multiply(discountMultiplier);
     }

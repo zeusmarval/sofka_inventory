@@ -22,4 +22,14 @@ public class ProductMapper {
         return product;
     }
 
+    public static Product toEntity(Product entity) {
+        Product product = new Product();
+        product.setId(entity.getId());
+        product.setName(entity.getName());
+        product.setQuantity(entity.getQuantity());
+        product.setBasePrice(entity.getBasePrice());
+        product.setWholesaleUnits(entity.getWholesaleUnits());
+        return product;
+    }
+
 }

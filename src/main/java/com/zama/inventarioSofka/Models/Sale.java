@@ -18,22 +18,6 @@ public class Sale {
 
     public Sale(){}
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getSaleDate() {
-        return saleDate;
-    }
-
-    /*public void setSaleDate(LocalDateTime saleDate) {
-        this.saleDate = saleDate;
-    }*/
-
     public List<SoldProduct> getSoldProducts() {
         return soldProducts;
     }
@@ -48,17 +32,6 @@ public class Sale {
 
     public void setTotalSale(BigDecimal totalSale) {
         this.totalSale = totalSale;
-    }
-
-    public void calculateTotalSale() {
-        this.totalSale = BigDecimal.ZERO;
-
-        for (SoldProduct soldProduct : soldProducts) {
-            System.out.println("Productos Vendidos");
-            System.out.println(soldProduct);
-            //soldProduct.calculateSubtotal();
-            //totalSale = totalSale.add(productTotal);
-        }
     }
 
 }

@@ -15,11 +15,11 @@ public class ProductResource {
     @Autowired
     private Product_Repository productRepository;
 
-    public Flux<ProductDTO> getAllProductsPaginated(int page, int size) {
+    public Flux<Product> getAllProductsPaginated(int page, int size) {
         return productRepository.findAll()
                 .skip((long) page * size)
                 .take(size)
-                .map(ProductMapper::toDTO);
+                .map(ProductMapper::toEntity);
     }
 
     public Mono<ProductDTO> saveProduct(ProductDTO productDTO) {

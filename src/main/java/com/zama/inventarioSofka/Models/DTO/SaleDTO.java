@@ -11,18 +11,7 @@ public class SaleDTO {
     private LocalDateTime saleDate = LocalDateTime.now();
     private List<SoldProduct> soldProducts;
     private BigDecimal totalSale;
-
     public SaleDTO() {
-    }
-
-    public SaleDTO(LocalDateTime saleDate, List<SoldProduct> soldProducts, BigDecimal totalSale) {
-        this.saleDate = saleDate;
-        this.soldProducts = soldProducts;
-        this.totalSale = totalSale;
-    }
-
-    public LocalDateTime getSaleDate() {
-        return saleDate;
     }
 
     public List<SoldProduct> getSoldProducts() {

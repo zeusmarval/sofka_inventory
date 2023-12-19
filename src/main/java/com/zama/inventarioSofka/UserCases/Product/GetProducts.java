@@ -1,6 +1,6 @@
 package com.zama.inventarioSofka.UserCases.Product;
 
-import com.zama.inventarioSofka.Models.DTO.ProductDTO;
+import com.zama.inventarioSofka.Models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,10 +21,10 @@ public class GetProducts {
         int page = Integer.parseInt(request.queryParam("page").orElse("0"));
         int size = Integer.parseInt(request.queryParam("size").orElse("10"));
 
-        Flux<ProductDTO> allProducts = productResource.getAllProductsPaginated(page, size);
+        Flux<Product> allProducts = productResource.getAllProductsPaginated(page, size);
 
         return ServerResponse.ok()
-                .body(allProducts, ProductDTO.class)
+                .body(allProducts, Product.class)
                 .switchIfEmpty(ServerResponse.notFound().build())
                 .onErrorResume(this::handleError);
     }
