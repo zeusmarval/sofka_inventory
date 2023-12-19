@@ -29,7 +29,7 @@ public class CreateSalesRetail {
                 .flatMap(sale -> ServerResponse.status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromValue(sale))
-                        .doOnSuccess(success -> publisherSales.publish(sale))
+                        .doOnSuccess(success -> publisherSales.publish(sale, Boolean.FALSE))
                 )
                 .switchIfEmpty(ServerResponse.badRequest().build()))
                 .onErrorResume(this::handleError);

@@ -20,10 +20,10 @@ public class PublisherSales {
     @Autowired
     private Gson gson;
 
-    public void publish(SaleDTO sale){
+    public void publish(SaleDTO sale, Boolean major){
 
         MessagePublish message = new MessagePublish(
-                "Retail", "Sale", gson.toJson(sale),
+                (major) ? "Major":"Retail", "Sale", gson.toJson(sale),
                 sale.getSoldProducts().stream().map(SoldProductMapper::toProduct).toList()
         );
 
