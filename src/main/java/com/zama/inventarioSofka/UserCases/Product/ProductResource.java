@@ -5,6 +5,8 @@ import com.zama.inventarioSofka.Models.Product;
 import com.zama.inventarioSofka.Utils.Mappers.ProductMapper;
 import com.zama.inventarioSofka.drivenAdapters.repository.Product_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,9 +18,9 @@ public class ProductResource {
     private Product_Repository productRepository;
 
     public Flux<Product> getAllProductsPaginated(int page, int size) {
-        return productRepository.findAll()
-                .skip((long) page * size)
-                .take(size)
+        Pageable pageable = PageRequest.of(page, size);
+
+        return productRepository.findAll(pageable.getSort())
                 .map(ProductMapper::toEntity);
     }
 
