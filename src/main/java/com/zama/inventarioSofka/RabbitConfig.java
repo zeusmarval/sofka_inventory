@@ -24,18 +24,19 @@ import java.security.NoSuchAlgorithmException;
 public class RabbitConfig {
     public static final String QUEUE_PRODUCT = "product-queue";
     public static final String QUEUE_SALES = "sales-queue";
+    public static final String QUEUE_GETS = "gets-queue";
     public static final String QUEUE_PRODCUCT_ERRORS = "product-errors-queue";
     public static final String QUEUE_SALES_ERRORS = "sales-errors-queue";
-    //public static final String QUEUE_NAME_ERRORS = "errors-queue";
+    public static final String QUEUE_GETS_ERRORS = "gets-errors-queue";
     public static final String EXCHANGE_NAME = "inventory-exchange";
     public static final String ROUTING_KEY_PRODUCT = "product.routing.key";
     public static final String ROUTING_KEY_SALES = "sales.routing.key";
-    //public static final String ROUTING_KEY_NAME_ALL = "all.routing.key";
-    //public static final String ROUTING_KEY_NAME_ERROR = "errors.routing.key";
+    public static final String ROUTING_KEY_GETS = "gets.routing.key";
     public static final String ROUTING_KEY_PRODUCT_ERROR = "errors.product.routing.key";
     public static final String ROUTING_KEY_SALES_ERROR = "errors.sales.routing.key";
-    public static final String URI_NAME = "amqps://xuvssrll:lMktC642iNhZ4wjfudHaET9jwFuJpOZm@cow.rmq2.cloudamqp.com/xuvssrll";
-    //public static final String URI_NAME = "amqps://frrbuzmm:ywSFdD7KMqE6rfoe2osmgX9w_Av74CoJ@cow.rmq2.cloudamqp.com/frrbuzmm";
+    public static final String ROUTING_KEY_GETS_ERROR = "errors.gets.routing.key";
+    @Value("${URI_NAME}")
+    private String URI_NAME;
 
     @Bean
     public AmqpAdmin amqpAdmin() {
@@ -45,18 +46,24 @@ public class RabbitConfig {
         var exchange = new TopicExchange(EXCHANGE_NAME);
         var queue_product = new Queue(QUEUE_PRODUCT, true, false, false);
         var queue_sales = new Queue(QUEUE_SALES, true, false, false);
+        var queue_gets = new Queue(QUEUE_GETS, true, false, false);
         var queue_errors_product = new Queue(QUEUE_PRODCUCT_ERRORS, true, false, false);
         var queue_errors_sale = new Queue(QUEUE_SALES_ERRORS, true, false, false);
+        var queue_errors_gets = new Queue(QUEUE_GETS_ERRORS, true, false, false);
 
         amqpAdmin.declareExchange(exchange);
         amqpAdmin.declareQueue(queue_product);
         amqpAdmin.declareQueue(queue_sales);
+        amqpAdmin.declareQueue(queue_gets);
         amqpAdmin.declareQueue(queue_errors_product);
         amqpAdmin.declareQueue(queue_errors_sale);
+        amqpAdmin.declareQueue(queue_errors_gets);
         amqpAdmin.declareBinding(BindingBuilder.bind(queue_product).to(exchange).with(ROUTING_KEY_PRODUCT));
         amqpAdmin.declareBinding(BindingBuilder.bind(queue_sales).to(exchange).with(ROUTING_KEY_SALES));
+        amqpAdmin.declareBinding(BindingBuilder.bind(queue_gets).to(exchange).with(ROUTING_KEY_GETS));
         amqpAdmin.declareBinding(BindingBuilder.bind(queue_errors_product).to(exchange).with(ROUTING_KEY_PRODUCT_ERROR));
         amqpAdmin.declareBinding(BindingBuilder.bind(queue_errors_sale).to(exchange).with(ROUTING_KEY_SALES_ERROR));
+        amqpAdmin.declareBinding(BindingBuilder.bind(queue_errors_gets).to(exchange).with(ROUTING_KEY_GETS_ERROR));
 
         return amqpAdmin;
     }

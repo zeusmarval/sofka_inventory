@@ -1,47 +1,16 @@
 package com.zama.inventarioSofka.Models;
 
+import com.zama.inventarioSofka.Models.DTO.ProductDTO;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class MessagePublish {
-    private LocalDateTime publishDate = LocalDateTime.now();
+    private String publishDate = LocalDateTime.now().toString();
     private String action;
     private String typeMessage;
     private String message;
-
-    public LocalDateTime getPublishDate() {
-        return publishDate;
-    }
-
-    public void setPublishDate(LocalDateTime publishDate) {
-        this.publishDate = publishDate;
-    }
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
-
-    public String getTypeMessage() {
-        return typeMessage;
-    }
-
-    public void setTypeMessage(String typeMessage) {
-        this.typeMessage = typeMessage;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public MessagePublish() {
-    }
+    private List<ProductDTO> product;
 
     public MessagePublish(String action, String typeMessage, String message) {
         this.action = action;
@@ -49,11 +18,11 @@ public class MessagePublish {
         this.message = message;
     }
 
-    public MessagePublish(LocalDateTime publishDate, String action, String typeMessage, String message) {
-        this.publishDate = publishDate;
+    public MessagePublish(String action, String typeMessage, String message, List<ProductDTO> product) {
         this.action = action;
         this.typeMessage = typeMessage;
         this.message = message;
+        this.product = product;
     }
 
     @Override

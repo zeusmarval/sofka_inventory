@@ -1,6 +1,7 @@
 package com.zama.inventarioSofka.UserCases.Product;
 
 import com.zama.inventarioSofka.Models.DTO.ProductDTO;
+import com.zama.inventarioSofka.drivenAdapters.bus.PublisherProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +17,9 @@ public class SaveManyProduct {
     @Autowired
     private ProductResource productResource;
 
+    @Autowired
+    private PublisherProduct publisherProduct;
+
     public Mono<ServerResponse> apply(ServerRequest request) {
         Flux<ProductDTO> productBody = request.bodyToFlux(ProductDTO.class);
 
@@ -25,6 +29,7 @@ public class SaveManyProduct {
                 .flatMap(products -> ServerResponse.status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromValue(products))
+                        .doOnSuccess(success -> publisherProduct.publish(products))
                 )
                 .switchIfEmpty(ServerResponse.badRequest().build())
                 .onErrorResume(this::handleError);

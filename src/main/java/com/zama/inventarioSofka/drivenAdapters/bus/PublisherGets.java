@@ -1,7 +1,6 @@
 package com.zama.inventarioSofka.drivenAdapters.bus;
 
 import com.google.gson.Gson;
-import com.zama.inventarioSofka.Models.DTO.ProductDTO;
 import com.zama.inventarioSofka.Models.MessagePublish;
 import com.zama.inventarioSofka.Models.Product;
 import com.zama.inventarioSofka.RabbitConfig;
