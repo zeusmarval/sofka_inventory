@@ -1,28 +1,28 @@
 package com.zama.inventarioSofka.Models;
 
+import java.math.BigDecimal;
+
 public class SoldProduct {
 
-    private Product product;
+    private String productName;
     private int quantity;
-    private double unitPrice;
-    private double subtotal;
+    private BigDecimal subtotal;
+
+    public SoldProduct(String productName, int quantity) {
+        this.productName = productName;
+        this.quantity = quantity;
+    }
 
     public SoldProduct() {
+
     }
 
-    public SoldProduct(Product product, int quantity, double unitPrice) {
-        this.product = product;
-        this.quantity = quantity;
-        this.unitPrice = unitPrice;
-        this.subtotal = quantity * unitPrice;
+    public String getProductName() {
+        return productName;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getQuantity() {
@@ -31,32 +31,21 @@ public class SoldProduct {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        updateSubtotal();
     }
 
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
-        updateSubtotal();
-    }
-
-    public double getSubtotal() {
+    public BigDecimal getSubtotal() {
         return subtotal;
     }
 
-    private void updateSubtotal() {
-        this.subtotal = quantity * unitPrice;
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
     }
 
     @Override
     public String toString() {
         return "SoldProduct{" +
-                "product=" + product +
+                "productName='" + productName + '\'' +
                 ", quantity=" + quantity +
-                ", unitPrice=" + unitPrice +
                 ", subtotal=" + subtotal +
                 '}';
     }

@@ -65,6 +65,28 @@ public class Product {
         this.wholesaleUnits = wholesaleUnits;
     }
 
+    public BigDecimal calculateTotalWholesale(int quantity) {
+        if (quantity >= wholesaleUnits) {
+            // Aplicar descuento del 10% si se alcanza la cantidad mínima al por mayor
+            BigDecimal discountedPrice = applyDiscount(basePrice);
+            int unitsForRetail = quantity % wholesaleUnits;
+            int unitsForWholesale = quantity - unitsForRetail;
+
+            BigDecimal totalRetail = BigDecimal.valueOf(unitsForRetail).multiply(basePrice);
+            BigDecimal totalWholesale = BigDecimal.valueOf(unitsForWholesale).multiply(discountedPrice);
+
+            return totalRetail.add(totalWholesale);
+        } else {
+            return basePrice.multiply(BigDecimal.valueOf(quantity));
+        }
+    }
+
+    private BigDecimal applyDiscount(BigDecimal basePrice) {
+        // Apply a 10% discount
+        BigDecimal discountMultiplier = BigDecimal.valueOf(0.9);
+        return basePrice.multiply(discountMultiplier);
+    }
+
     @Override
     public String toString() {
         return "Product{" +

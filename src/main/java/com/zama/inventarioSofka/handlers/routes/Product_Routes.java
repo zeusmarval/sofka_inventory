@@ -17,12 +17,12 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 public class Product_Routes {
 
     @Autowired
-    SaveOneProduct saveOneProduct;
+    private SaveOneProduct saveOneProduct;
     @Autowired
-    SaveManyProduct saveManyProduct;
+    private SaveManyProduct saveManyProduct;
 
     @Autowired
-    GetProducts getProducts;
+    private GetProducts getProducts;
 
     @Bean
     public RouterFunction<ServerResponse> ProductRoutes() {

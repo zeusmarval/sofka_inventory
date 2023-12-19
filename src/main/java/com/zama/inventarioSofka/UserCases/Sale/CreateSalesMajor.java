@@ -1,6 +1,6 @@
-package com.zama.inventarioSofka.UserCases.Product;
+package com.zama.inventarioSofka.UserCases.Sale;
 
-import com.zama.inventarioSofka.Models.DTO.ProductDTO;
+import com.zama.inventarioSofka.Models.DTO.SaleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,28 +11,25 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 @Service
-public class SaveOneProduct {
-
+public class CreateSalesMajor {
     @Autowired
-    private ProductResource productResource;
+    private SalesResource salesResource;
 
     public Mono<ServerResponse> apply(ServerRequest request) {
-        Mono<ProductDTO> productBody = request.bodyToMono(ProductDTO.class);
+        Mono<SaleDTO> saleBody = request.bodyToMono(SaleDTO.class);
 
-        return productBody
-                .flatMap(productDTO -> productResource.saveProduct(productDTO)
+        return saleBody.flatMap(saleDTO -> salesResource.saveSaleMajor(saleDTO)
                         .flatMap(product -> ServerResponse.status(HttpStatus.CREATED)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .body(BodyInserters.fromValue(product))
-                )
-                .switchIfEmpty(ServerResponse.badRequest().build()))
+                        )
+                        .switchIfEmpty(ServerResponse.badRequest().build()))
                 .onErrorResume(this::handleError);
     }
 
     private Mono<ServerResponse> handleError(Throwable error) {
         return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue("Error al registrar inventario: \n" + error));
+                .body(BodyInserters.fromValue("Error al registrar venta: \n" + error));
     }
-
 }

@@ -3,6 +3,7 @@ package com.zama.inventarioSofka.Models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,18 +12,11 @@ public class Sale {
 
     @Id
     private String id;
-    private LocalDateTime saleDate;
+    private LocalDateTime saleDate = LocalDateTime.now();
     private List<SoldProduct> soldProducts;
-    private double totalSale;
+    private BigDecimal totalSale;
 
-    public Sale() {
-    }
-
-    public Sale(LocalDateTime saleDate, List<SoldProduct> soldProducts) {
-        this.saleDate = saleDate;
-        this.soldProducts = soldProducts;
-        calculateTotalSale();
-    }
+    public Sale(){}
 
     public String getId() {
         return id;
@@ -32,17 +26,13 @@ public class Sale {
         this.id = id;
     }
 
-    public void setTotalSale(double totalSale) {
-        this.totalSale = totalSale;
-    }
-
     public LocalDateTime getSaleDate() {
         return saleDate;
     }
 
-    public void setSaleDate(LocalDateTime saleDate) {
+    /*public void setSaleDate(LocalDateTime saleDate) {
         this.saleDate = saleDate;
-    }
+    }*/
 
     public List<SoldProduct> getSoldProducts() {
         return soldProducts;
@@ -50,25 +40,25 @@ public class Sale {
 
     public void setSoldProducts(List<SoldProduct> soldProducts) {
         this.soldProducts = soldProducts;
-        calculateTotalSale();
     }
 
-    public double getTotalSale() {
+    public BigDecimal getTotalSale() {
         return totalSale;
     }
 
-    private void calculateTotalSale() {
-        this.totalSale = soldProducts.stream()
-                .mapToDouble(SoldProduct::getSubtotal)
-                .sum();
+    public void setTotalSale(BigDecimal totalSale) {
+        this.totalSale = totalSale;
     }
 
-    @Override
-    public String toString() {
-        return "Sale{" +
-                "saleDate=" + saleDate +
-                ", soldProducts=" + soldProducts +
-                ", totalSale=" + totalSale +
-                '}';
+    public void calculateTotalSale() {
+        this.totalSale = BigDecimal.ZERO;
+
+        for (SoldProduct soldProduct : soldProducts) {
+            System.out.println("Productos Vendidos");
+            System.out.println(soldProduct);
+            //soldProduct.calculateSubtotal();
+            //totalSale = totalSale.add(productTotal);
+        }
     }
+
 }
