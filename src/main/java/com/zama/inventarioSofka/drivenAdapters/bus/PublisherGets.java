@@ -28,7 +28,7 @@ public class PublisherGets {
 
         sender
                 .send(Mono.just(new OutboundMessage(RabbitConfig.EXCHANGE_NAME,
-                        RabbitConfig.ROUTING_KEY_PRODUCT, gson.toJson(message).getBytes()))).subscribe();
+                        RabbitConfig.ROUTING_KEY_GETS, gson.toJson(message).getBytes()))).subscribe();
 
     }
 }
