@@ -1,6 +1,7 @@
 package com.zama.inventarioSofka.UserCases.Product;
 
 import com.zama.inventarioSofka.Models.Product;
+import com.zama.inventarioSofka.drivenAdapters.bus.PublisherGets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,16 +18,23 @@ public class GetProducts {
     @Autowired
     private ProductResource productResource;
 
+    @Autowired
+    private PublisherGets publisherGets;
+
     public Mono<ServerResponse> apply(ServerRequest request) {
         int page = Integer.parseInt(request.queryParam("page").orElse("0"));
         int size = Integer.parseInt(request.queryParam("size").orElse("10"));
 
         Flux<Product> allProducts = productResource.getAllProductsPaginated(page, size);
 
-        return ServerResponse.ok()
-                .body(allProducts, Product.class)
-                .switchIfEmpty(ServerResponse.notFound().build())
-                .onErrorResume(this::handleError);
+        return allProducts.collectList().flatMap(products -> {
+            publisherGets.publish(products);
+            return ServerResponse.ok()
+                    .body(allProducts, Product.class)
+                    .switchIfEmpty(ServerResponse.notFound().build())
+                    .onErrorResume(this::handleError);
+        });
+
     }
 
     private Mono<ServerResponse> handleError(Throwable error) {
