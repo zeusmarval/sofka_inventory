@@ -36,8 +36,10 @@ public class CreateSalesRetail {
     }
 
     private Mono<ServerResponse> handleError(Throwable error) {
+        String messageError = "Error al registrar venta: " + error;
+        publisherSales.errors(messageError);
         return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue("Error al registrar venta: \n" + error));
+                .body(BodyInserters.fromValue(messageError));
     }
 }
