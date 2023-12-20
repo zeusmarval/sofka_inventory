@@ -32,10 +32,15 @@ public class PublisherSales {
                         RabbitConfig.ROUTING_KEY_SALES, gson.toJson(message).getBytes()))).subscribe();
     }
 
-    /*public void publishError(Object object){
+    public void errors(String error){
+
+        MessagePublish message = new MessagePublish(
+                "Error", "Sale", error
+        );
+
         sender
                 .send(Mono.just(new OutboundMessage(RabbitConfig.EXCHANGE_NAME,
-                        RabbitConfig.ROUTING_KEY_SALES_ERROR, gson.toJson(object).getBytes()))).subscribe();
-    }*/
+                        RabbitConfig.ROUTING_KEY_SALES_ERROR, gson.toJson(message).getBytes()))).subscribe();
+    }
 
 }
