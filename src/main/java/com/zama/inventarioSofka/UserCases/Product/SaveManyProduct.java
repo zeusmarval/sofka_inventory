@@ -36,8 +36,10 @@ public class SaveManyProduct {
     }
 
     private Mono<ServerResponse> handleError(Throwable error) {
+        String messageError = "Error al registrar inventario: " + error;
+        publisherProduct.errors(messageError);
         return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue("Error al registrar inventario: \n" + error));
+                .body(BodyInserters.fromValue(messageError));
     }
 }

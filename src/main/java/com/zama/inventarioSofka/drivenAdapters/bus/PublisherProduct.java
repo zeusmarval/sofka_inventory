@@ -31,4 +31,16 @@ public class PublisherProduct {
                 .send(Mono.just(new OutboundMessage(RabbitConfig.EXCHANGE_NAME,
                         RabbitConfig.ROUTING_KEY_PRODUCT, gson.toJson(message).getBytes()))).subscribe();
     }
+
+    public void errors(String error){
+
+        MessagePublish message = new MessagePublish(
+                "Error", "Product", error
+        );
+
+        sender
+                .send(Mono.just(new OutboundMessage(RabbitConfig.EXCHANGE_NAME,
+                        RabbitConfig.ROUTING_KEY_PRODUCT_ERROR, gson.toJson(message).getBytes()))).subscribe();
+    }
+
 }
