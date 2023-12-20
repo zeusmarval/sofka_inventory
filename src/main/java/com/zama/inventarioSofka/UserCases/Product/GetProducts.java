@@ -38,9 +38,11 @@ public class GetProducts {
     }
 
     private Mono<ServerResponse> handleError(Throwable error) {
+        String messageError = "Error al obtener productos paginados: " + error;
+        publisherGets.errors(messageError);
         return ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue("Error al obtener productos paginados: \n" + error.getMessage()));
+                .body(BodyInserters.fromValue(messageError));
     }
 
 }
